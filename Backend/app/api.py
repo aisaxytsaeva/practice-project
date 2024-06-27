@@ -1,6 +1,5 @@
 import requests
 from fastapi import FastAPI
-from pydantic import BaseModel
 from contextlib import asynccontextmanager
 from db import create_tables, delete_tables
 
