@@ -1,9 +1,4 @@
-import requests
+import uvicorn
 
-
-response = requests.get('https://api.hh.ru/vacancies')
-
-vacancies = response.json()['items']
-for vacancy in vacancies:
-    name = vacancy['name']
-    print(f"Вакансия: {name}")
+if __name__ == "__main__":
+    uvicorn.run("app.api:app", host="0.0.0.0", port=8081, reload=True)

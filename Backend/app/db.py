@@ -19,6 +19,7 @@ class JobsTable(Model):
     
     id: Mapped[int] = mapped_collumn(primary_key=True)
     name: Mapped[str]
+    salary: Mapped[int]
     exp: Mapped[str]
     employ: Mapped[str]
     region: Mapped[str]
