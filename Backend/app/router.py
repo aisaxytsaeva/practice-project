@@ -15,7 +15,8 @@ router = APIRouter(
 async def add_one(cls, job_data: JobAdd ):
     async with new_session() as session:
         response = requests.get('https://api.hh.ru/vacancies')
-        data = response.json()
+        vacancies = response.json()
+        
         job_dict = job_data.model_dump()
         job = JobsTable(**job_dict)
         

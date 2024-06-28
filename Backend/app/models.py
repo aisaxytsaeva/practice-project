@@ -5,8 +5,11 @@ from pydantic import BaseModel, ConfigDict
 class JobAdd(BaseModel):
     name: str
     area: Optional[str] = None
-    exp: Optional[str] = None
     sch: Optional[str] = None
+    emp: Optional[str]= None
+    exp: Optional[str] = None
+    
+    
     
     
 class JobSchema(JobAdd):
