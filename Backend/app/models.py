@@ -1,14 +1,20 @@
-from pydantic import BaseModel
+from typing import Optional
+from pydantic import BaseModel, ConfigDict
 
 
 class JobAdd(BaseModel):
-    id: int
     name: str
+    area: Optional[str] = None
+    exp: Optional[str] = None
+    sch: Optional[str] = None
     
-class JobSchema(BaseModel):
+    
+class JobSchema(JobAdd):
     id: int
-    name: str
-    salary: int
-    exp: str
-    employ: str
-    region: str
+    
+    model_config = ConfigDict(from_attributes=True)
+
+
+class JobId(BaseModel):
+    ok: bool= True
+    job_id: int

@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_collumn
-from sqlalchemy import ForeignKey
+
 
 
 
@@ -19,10 +19,11 @@ class JobsTable(Model):
     
     id: Mapped[int] = mapped_collumn(primary_key=True)
     name: Mapped[str]
+    city: Mapped[str]
     salary: Mapped[int]
     exp: Mapped[str]
-    employ: Mapped[str]
-    region: Mapped[str]
+    schelude: Mapped[str]
+    
     
 
 async def create_tables():
