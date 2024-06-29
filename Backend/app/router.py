@@ -1,9 +1,7 @@
-from fastapi import APIRouter
-from sqlalchemy import select
-import requests
-from db import new_session, JobsTable
-from models import JobAdd, JobSchema
-
+from typing import Annotated
+from fastapi import APIRouter, Depends
+from app.models import JobAdd, JobId, JobSchema
+from app.repository import JobRepository
 
 
 router = APIRouter(
@@ -12,25 +10,15 @@ router = APIRouter(
 
 
 @router.post("/")
-async def add_one(cls, job_data: JobAdd ):
-    async with new_session() as session:
-        response = requests.get('https://api.hh.ru/vacancies')
-        vacancies = response.json()
-        
-        job_dict = job_data.model_dump()
-        job = JobsTable(**job_dict)
-        
-        session.add(job)
-        await session.flush()
-        await session.commit()
-        return job.id
+async def add_job(
+    job: Annotated[JobAdd, Depends()],
+)-> JobId:
+    job_id = await JobRepository.add_one(job)
+    return {"ok": True, "task_id": job_id}
+
         
 
 @router.get("/")
-async def find_all(cls) -> list[JobSchema]:
-    async with new_session() as session:
-        query = select(JobsTable)
-        result = await session.execute(query)
-        job_models = result.scalars().all()
-        job_schemas = [JobSchema.model_validate(job_model) for job_model in job_models]
-        return job_schemas
+async def get_jobs() -> list[JobSchema]:
+    jobs= await JobRepository.find_all()
+    return jobs

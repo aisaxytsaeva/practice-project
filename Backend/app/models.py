@@ -1,21 +1,20 @@
-from typing import Optional
-from pydantic import BaseModel, ConfigDict
+# from typing import Optional
+from pydantic import BaseModel
 
 
 class JobAdd(BaseModel):
     name: str
-    area: Optional[str] = None
-    sch: Optional[str] = None
-    emp: Optional[str]= None
-    exp: Optional[str] = None
     
     
     
     
-class JobSchema(JobAdd):
+    
+class JobSchema(BaseModel):
     id: int
-    
-    model_config = ConfigDict(from_attributes=True)
+    name: str
+    sch: str
+    emp: str
+    exp: str
 
 
 class JobId(BaseModel):

@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from db import create_tables, delete_tables
+from app.db import create_tables, delete_tables
+from app.router import router
 
 
 @asynccontextmanager
@@ -12,4 +13,8 @@ async def lifespan(app: FastAPI):
     yield
     print("Turning off")
 
+app = FastAPI(lifespan=lifespan)
+app.include_router(router)
 
+
+ 
