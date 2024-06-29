@@ -13,11 +13,3 @@ async def lifespan(app: FastAPI):
     print("Turning off")
 
 
-response = requests.get('https://api.hh.ru/vacancies')
-
-vacancy_list = [] 
-vacancies = response.json()['items']
-for vacancy in vacancies:
-    name = vacancy['name']
-    print(f"Вакансия: {name}")
-    vacancy_list.append(name)
