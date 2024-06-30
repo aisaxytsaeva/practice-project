@@ -1,5 +1,6 @@
 from sqlalchemy import select
 import requests
+from typing import List
 from app.db import new_session, JobsTable
 from app.models import JobAdd, JobSchema
 
@@ -15,9 +16,7 @@ class JobRepository:
             
             for vacancy in vacancies:
                 vacancy_name = vacancy['name']
-            
-            for area in vacancies:
-                area_name = area['area']
+
             
             for schedule in vacancies:
                 schedule_name = schedule['schedule']['name']
@@ -35,7 +34,7 @@ class JobRepository:
             await session.commit()
             return job.id
     @classmethod
-    async def find_all(cls) -> list[JobSchema]:
+    async def find_all(cls) -> List[JobSchema]:
         async with new_session() as session:
             query = select(JobsTable)
             result = await session.execute(query)
