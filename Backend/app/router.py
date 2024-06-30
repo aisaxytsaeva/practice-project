@@ -20,5 +20,6 @@ async def add_job(
 
 @router.get("/")
 async def get_jobs() -> List[JobSchema]:
-    jobs= await JobRepository.find_all()
-    return jobs
+    jobs = await JobRepository.find_all()
+    jobs_schema = list(map(lambda job: JobSchema(**job.dict()), jobs)) 
+    return jobs_schema
