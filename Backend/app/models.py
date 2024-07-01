@@ -7,16 +7,11 @@ class JobAdd(BaseModel):
     
     
     
-    
-    
-class JobSchema(BaseModel):
+class JobSchema(JobAdd):
     id: int
-    name: str
     sch: str
     emp: str
     exp: str
+    class Config:
+        from_attributes = True
 
-
-class JobId(BaseModel):
-    ok: bool= True
-    job_id: int
