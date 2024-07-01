@@ -15,3 +15,7 @@ class JobSchema(JobAdd):
     class Config:
         from_attributes = True
 
+
+class JobId(BaseModel):
+    ok: bool= True
+    job_id: int
