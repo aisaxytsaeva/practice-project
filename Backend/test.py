@@ -93,10 +93,7 @@ class JobRepository:
                 print(f"Ошибка: {response.status_code}")
                 return list_vacancies
             
-            
-            session.add(job)
-            await session.flush()
-            await session.commit()
+
 
     @classmethod
     async def find_all(cls) -> List[JobSchema]:

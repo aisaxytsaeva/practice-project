@@ -4,12 +4,12 @@ from pydantic import BaseModel
 
 class JobAdd(BaseModel):
     name: str
+    sch: str
     
     
     
 class JobSchema(JobAdd):
     id: int
-    sch: str
     emp: str
     exp: str
     class Config:
