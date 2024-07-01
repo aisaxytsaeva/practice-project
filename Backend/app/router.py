@@ -1,7 +1,6 @@
 from typing import Annotated, List
 from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from app.models import JobAdd, JobSchema
+from app.models import JobAdd, JobSchema, JobId
 from app.repository import JobRepository
 
 
