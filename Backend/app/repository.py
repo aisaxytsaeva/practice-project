@@ -55,9 +55,11 @@ class JobRepository:
     @classmethod
     async def find_all(cls) -> List[JobSchema]:
         async with new_session() as session:
-            jobs = JobsnameTable.query.all()
+            query = select(JobsnameTable)
+            result = await session.execute(query)
+            job_models = result.scalars().all()
             results_data = []
-            for job in jobs:
+            for job in job_models:
                 job_data = JobsdataTable.query.filter_by(job_id=job.id).first()
                 results_data.append({
                     'name': job_data.name,
