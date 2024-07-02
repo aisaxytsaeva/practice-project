@@ -10,7 +10,7 @@ class JobRepository:
     async def add_one(cls, job_data: JobAdd ):
         async with new_session() as session:
             search_params = job_data.model_dump()
-            list_vacancies = []
+            filtered_vacancies = []
             response = requests.get("https://api.hh.ru/vacancies", params=search_params) 
             if response.status_code == 200:
                 all_vacancies = response.json()['items']
@@ -39,18 +39,17 @@ class JobRepository:
                             'employment': employment_name,
                             'experience': experience_name
                         })
+                        return new_vacancy_data.job_id
                         
                     else:
                         title='Простите, ничего не нашлось :('
                         print(title)
+                        return None
             else:
                 print(f"Ошибка: {response.status_code}")
-            return list_vacancies
             
             
-            # session.add(job)
-            # await session.flush()
-            # await session.commit()
+            
 
     @classmethod
     async def find_all(cls) -> List[JobSchema]:

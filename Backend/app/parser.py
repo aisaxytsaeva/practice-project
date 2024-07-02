@@ -30,4 +30,5 @@ def get_vacancies(name:str):
         print(f"Ошибка: {response.status_code}")
     return list_vacancies
 
+print(get_vacancies('менеджер'))
 

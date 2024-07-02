@@ -32,6 +32,7 @@ class JobsdataTable(Model):
     emp: Mapped[str]
     exp: Mapped[str]
     
+    
 
 async def create_tables():
     async with engine.begin() as conn:
