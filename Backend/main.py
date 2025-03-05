@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from app.db import create_tables, delete_tables
-from app.router import router
+from db import create_tables, delete_tables
+from router import router
 
 
 @asynccontextmanager
@@ -15,6 +15,10 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 app.include_router(router)
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the Job Search API!"}
 
 
 
