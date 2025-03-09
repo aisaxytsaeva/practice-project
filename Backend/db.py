@@ -1,3 +1,4 @@
+from typing import List
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import mapped_column, DeclarativeBase, Mapped
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
@@ -21,8 +22,7 @@ class JobsnameTable(Model):
     
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]
-    
-    
+       
 class JobsdataTable(Model):
     __tablename__ = 'jobs_data'
     
